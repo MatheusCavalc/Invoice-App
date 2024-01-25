@@ -9,15 +9,19 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['client_id', 'number', 'issue_date', 'total'];
+    protected $fillable = ['client_id', 'number', 'issue_date', 'items', 'total'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'items' => 'array',
+    ];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
-    }
-
-    public function items()
-    {
-        return $this->hasMany(InvoiceItem::class);
     }
 }

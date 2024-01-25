@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained();
             $table->string('number');
             $table->date('issue_date');
+            $table->longText('items');
             $table->decimal('total', 10, 2);
             $table->timestamps();
         });
