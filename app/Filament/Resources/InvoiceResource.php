@@ -34,15 +34,6 @@ class InvoiceResource extends Resource
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('issue_date')
                     ->required(),
-
-
-
-
-
-
-
-
-
                 Forms\Components\Repeater::make('items')
                     ->schema([
                         Forms\Components\Select::make('item')
@@ -57,17 +48,6 @@ class InvoiceResource extends Resource
                         Forms\Components\TextInput::make('total')->required(),
                     ])
                     ->columns(4),
-
-
-
-
-
-
-
-
-
-
-
                 Forms\Components\TextInput::make('total')
                     ->required()
                     ->numeric(),
@@ -103,6 +83,7 @@ class InvoiceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -123,6 +104,7 @@ class InvoiceResource extends Resource
         return [
             'index' => Pages\ListInvoices::route('/'),
             'create' => Pages\CreateInvoice::route('/create'),
+            'view' => Pages\ViewInvoice::route('/{record}'),
             'edit' => Pages\EditInvoice::route('/{record}/edit'),
         ];
     }
