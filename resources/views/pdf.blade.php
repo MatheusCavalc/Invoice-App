@@ -1,31 +1,32 @@
-<div>
-    <script src="https://cdn.tailwindcss.com"></script>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="flex w-full justify-end mb-8">
-        <div class="">
-            <button wire:click="download"
-                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 flex gap-2">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice</title>
 
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
+    <!-- Styles -->
+    <style>
+        .py-9 {
+            padding-top: 2.25rem;
+            padding-bottom: 2.25rem;
+        }
+    </style>
+</head>
 
-                Download Invoice
-            </button>
-        </div>
-    </div>
-
+<body>
     <section class="py-20 bg-black">
         <div class="max-w-5xl mx-auto py-10 bg-white">
             <article class="overflow-hidden">
-                <div class="bg-[white] rounded-b-md">
-                    <div class="p-9 flex justify-between">
+                <div class="bg-white rounded-b-md">
+                    <div class="py-9 flex justify-between">
                         <div>
-                            <p class="text-4xl font-bold">Invoice #{{ $invoice->number }}</p>
+                            <p class="text-4xl font-bold">Invoice #{{ $data->number }}</p>
 
-                            <p class="mt-2 font-light text-xl">{{ $invoice->issue_date }}</p>
+                            <p class="mt-2 font-light text-xl">{{ $data->issue_date }}</p>
                         </div>
 
                         <div class="text-slate-700">
@@ -39,12 +40,12 @@
                         <div class="flex w-2/3 justify-between">
                             <div class="font-light text-slate-700">
                                 <p class="font-normal text-slate-500 italic">Billed From</p>
-                                <p>{{ \App\Models\Client::where('id', $invoice->client_id)->first()->name }}
+                                <p>{{ \App\Models\Client::where('id', $data->client_id)->first()->name }}
                                 </p>
-                                <p>{{ \App\Models\Client::where('id', $invoice->client_id)->first()->email }}
+                                <p>{{ \App\Models\Client::where('id', $data->client_id)->first()->email }}
                                 </p>
                                 <p>Frisco</p>
-                                <p>{{ \App\Models\Client::where('id', $invoice->client_id)->first()->phone }}
+                                <p>{{ \App\Models\Client::where('id', $data->client_id)->first()->phone }}
                                 </p>
                             </div>
 
@@ -83,20 +84,15 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($invoice->items as $itemList)
+                                    @foreach ($data->items as $itemList)
                                         <tr class="border-b border-slate-200">
                                             <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
                                                 <div class="font-medium text-slate-700">{{ $itemList['item'] }}</div>
-                                                <div class="mt-0.5 text-slate-500 sm:hidden">
-                                                    1 unit at $0.00
-                                                </div>
                                             </td>
-                                            <td
-                                                class="hidden px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
+                                            <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
                                                 {{ $itemList['quantity'] }}
                                             </td>
-                                            <td
-                                                class="hidden px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
+                                            <td class="px-3 py-4 text-sm text-right text-slate-500 sm:table-cell">
                                                 ${{ $itemList['price'] }}
                                             </td>
                                             <td
@@ -118,7 +114,7 @@
                                             Subtotal
                                         </th>
                                         <td class="pt-6 pl-3 pr-4 text-sm text-right text-slate-500 sm:pr-6 md:pr-0">
-                                            ${{ $invoice->total }}
+                                            ${{ $data->total }}
                                         </td>
                                     </tr>
                                     <tr>
@@ -158,7 +154,7 @@
                                         </th>
                                         <td
                                             class="pt-4 pl-3 pr-4 text-sm font-normal text-right text-slate-700 sm:pr-6 md:pr-0">
-                                            ${{ $invoice->total }}
+                                            ${{ $data->total }}
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -166,7 +162,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-10 p-9">
+                    <div class="mt-48 py-9">
                         <div class="border-t pt-9 border-slate-200">
                             <div class="text-sm font-light text-slate-700">
                                 <p>
@@ -187,4 +183,6 @@
             </article>
         </div>
     </section>
-</div>
+</body>
+
+</html>
