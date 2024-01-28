@@ -23,7 +23,7 @@
                 <div class="bg-[white] rounded-b-md">
                     <div class="p-9 flex justify-between">
                         <div>
-                            <p class="text-4xl font-bold">Invoice #{{ $invoice->number }}</p>
+                            <p class="text-2xl lg:text-4xl font-bold">Invoice #{{ $invoice->number }}</p>
 
                             <p class="mt-2 font-light text-xl">{{ $invoice->issue_date }}</p>
                         </div>
@@ -35,8 +35,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="px-9">
-                        <div class="flex w-2/3 justify-between">
+                    <div class="px-3 lg:px-9">
+                        <div class="flex w-full lg:w-2/3 justify-between">
                             <div class="font-light text-slate-700">
                                 <p class="font-normal text-slate-500 italic">Billed From</p>
                                 <p>{{ \App\Models\Client::where('id', $invoice->client_id)->first()->name }}
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    <div class="px-9 pt-14">
+                    <div class="px-3 lg:px-9 pt-14">
                         <div class="flex flex-col mx-0 mt-2">
                             <table class="min-w-full divide-y divide-slate-500">
                                 <thead>
@@ -88,7 +88,7 @@
                                             <td class="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
                                                 <div class="font-medium text-slate-700">{{ $itemList['item'] }}</div>
                                                 <div class="mt-0.5 text-slate-500 sm:hidden">
-                                                    1 unit at $0.00
+                                                    1 unit at ${{ $itemList['price'] }}
                                                 </div>
                                             </td>
                                             <td

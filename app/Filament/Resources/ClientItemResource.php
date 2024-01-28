@@ -18,7 +18,18 @@ class ClientItemResource extends Resource
 {
     protected static ?string $model = ClientItem::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+
+    protected static ?string $navigationLabel = 'Client Products';
+
+    protected static ?int $navigationSort = 2;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    protected static ?string $navigationGroup = 'Partners';
 
     public static function form(Form $form): Form
     {

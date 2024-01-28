@@ -18,7 +18,11 @@ class InvoiceResource extends Resource
 {
     protected static ?string $model = Invoice::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationGroup = 'Invoices';
 
     public static function form(Form $form): Form
     {
@@ -51,7 +55,7 @@ class InvoiceResource extends Resource
                 Forms\Components\TextInput::make('total')
                     ->required()
                     ->numeric(),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -59,8 +63,8 @@ class InvoiceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('client_id')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Client'),
+                    //->options(Client::all()->pluck('name', 'id')),
                 Tables\Columns\TextColumn::make('number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('issue_date')
