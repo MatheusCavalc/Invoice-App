@@ -10,4 +10,9 @@ class ClientItem extends Model
     use HasFactory;
 
     protected $fillable = ['client_id', 'name'];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

@@ -50,9 +50,8 @@ class ClientItemResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('client_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('client.name')
+                    ->label('Client'),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

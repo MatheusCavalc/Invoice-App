@@ -24,6 +24,11 @@ class InvoiceResource extends Resource
 
     protected static ?string $navigationGroup = 'Invoices';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -47,7 +52,7 @@ class InvoiceResource extends Resource
                                 'owner' => 'Owner',
                             ])
                             ->required(),
-                        Forms\Components\TextInput::make('price')->required(),
+                        Forms\Components\TextInput::make('price')->required()->label('Price (U)'),
                         Forms\Components\TextInput::make('quantity')->required(),
                         Forms\Components\TextInput::make('total')->required(),
                     ])
@@ -62,11 +67,10 @@ class InvoiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('client_id')
-                    ->label('Client'),
-                    //->options(Client::all()->pluck('name', 'id')),
                 Tables\Columns\TextColumn::make('number')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('client.name')
+                    ->label('Client'),
                 Tables\Columns\TextColumn::make('issue_date')
                     ->date()
                     ->sortable(),
